@@ -26,3 +26,21 @@ struct date
 ofstream fout;
 ifstream fin;
 
+class item
+{
+    int itemno;
+    char name[25];
+    date d;
+public:
+    void add()
+    {
+        cout<<"\n\n\tItem No: ";
+        cin>>itemno;
+        cout<<"\n\n\tName of the item: ";
+        cin>>name;
+//gets(name);
+        cout<<"\n\n\tManufacturing Date(dd-mm-yy): ";
+        cin>>d.mm>>d.dd>>d.yy;
+    }
+
+
