@@ -66,5 +66,89 @@ public:
 
 };
 
+class amount: public item
+{
+    float price,qty,tax,gross,dis,netamt;
+public:
+    void add();
+    void show();
+    void report();
+    void calculate();
+    void pay();
+    float retnetamt()
+    {
+        return(netamt);
+    }
+} amt;
+
+void amount::add()
+{
+    item::add();
+    cout<<"\n\n\tPrice: ";
+    cin>>price;
+    cout<<"\n\n\tQuantity: ";
+    cin>>qty;
+    cout<<"\n\n\tTax percent: ";
+    cin>>tax;
+    cout<<"\n\n\tDiscount percent: ";
+    cin>>dis;
+    calculate();
+    fout.write((char *)&amt,sizeof(amt));
+    fout.close();
+}
+void amount::calculate()
+{
+    gross=price+(price*(tax/100));
+    netamt=qty*(gross-(gross*(dis/100)));
+}
+void amount::show()
+{
+    fin.open("itemstore.dat",ios::binary);
+    fin.read((char*)&amt,sizeof(amt));
+    item::show();
+    cout<<"\n\n\tNet amount: ";
+    cout<<netamt;
+    fin.close();
+}
+
+void amount::report()
+{
+    item::report();
+    gotoxy(23,k);
+    cout<<price;
+    gotoxy(33,k);
+    cout<<qty;
+    gotoxy(44,k);
+    cout<<tax;
+    gotoxy(52,k);
+    cout<<dis;
+    gotoxy(64,k);
+    cout<<netamt;
+    k=k+1;
+    if(k==50)
+    {
+        gotoxy(25,50);
+        cout<<"PRESS ANY KEY TO CONTINUE...";
+        getch();
+        k=7;
+        system("cls");
+        gotoxy(30,3);
+        cout<<" ITEM DETAILS ";
+        gotoxy(3,5);
+        cout<<"NUMBER";
+        gotoxy(13,5);
+        cout<<"NAME";
+        gotoxy(23,5);
+        cout<<"PRICE";
+        gotoxy(33,5);
+        cout<<"QUANTITY";
+        gotoxy(44,5);
+        cout<<"TAX";
+        gotoxy(52,5);
+        cout<<"DEDUCTION";
+        gotoxy(64,5);
+        cout<<"NET AMOUNT";
+    }
+}
 
 
