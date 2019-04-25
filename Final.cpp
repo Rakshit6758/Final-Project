@@ -186,4 +186,18 @@ menu:
     cin>>ch;
     switch(ch)
 
+ {
+    case 1:
+ss:
+        system("cls");
+        gotoxy(25,2);
+        cout<<"Bill Details";
+        gotoxy(25,3);
+        cout<<"================\n\n";
+        cout<<"\n\t\t1.All Items\n\n";
+        cout<<"\t\t2.Back to Main menu\n\n";
+        cout<<"\t\tPlease Enter Required Option: ";
+        int cho;
+        cin>>cho;
+        if(cho==1)
 
