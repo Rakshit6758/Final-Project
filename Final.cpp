@@ -357,4 +357,44 @@ db:
             else if (flag==0)
                 cout<<"\n\t\tItem does not Exist! Please Retry";
             getch();
+            goto db
+		    
+		    
+		    ;
+
+
+	    case 4:
+            goto menu;
+        default:
+            cout<<"\n\n\t\tWrong Choice!!! Retry";
+            getch();
             goto db;
+        }
+    case 3:
+        system("cls");
+        flag=0;
+        int ino;
+        cout<<"\n\n\t\tEnter Item Number :";
+        cin>>ino;
+        fin.open("itemstore.dat",ios::binary);
+        if(!fin)
+        {
+            cout<<"\n\nFile Not Found...\nProgram Terminated!";
+            goto menu;
+        }
+        fin.seekg(0);
+        while(fin.read((char*)&amt,sizeof(amt)))
+        {
+            int x=amt.item::retno();
+            if(x==ino)
+            {
+                amt.pay();
+                flag=1;
+                break;
+            }
+        }
+        if(flag==0)
+            cout<<"\n\t\tItem does not exist....Please Retry!";
+        getch();
+        fin.close();
+        goto menu;
