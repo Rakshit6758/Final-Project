@@ -186,4 +186,129 @@ menu:
     cin>>ch;
     switch(ch)
 
+ {
+    case 1:
+ss:
+        system("cls");
+        gotoxy(25,2);
+        cout<<"Bill Details";
+        gotoxy(25,3);
+        cout<<"================\n\n";
+        cout<<"\n\t\t1.All Items\n\n";
+        cout<<"\t\t2.Back to Main menu\n\n";
+        cout<<"\t\tPlease Enter Required Option: ";
+        int cho;
+        cin>>cho;
+        if(cho==1)
+  {
+            system("cls");
+            gotoxy(30,3);
+            cout<<" BILL DETAILS ";
+            gotoxy(3,5);
+            cout<<"ITEM NO";
+            gotoxy(13,5);
+            cout<<"NAME";
+            gotoxy(23,5);
+            cout<<"PRICE";
+            gotoxy(33,5);
+            cout<<"QUANTITY";
+            gotoxy(44,5);
+            cout<<"TAX %";
+            gotoxy(52,5);
+            cout<<"DISCOUNT %";
+            gotoxy(64,5);
+            cout<<"NET AMOUNT";
+            fin.open("itemstore.dat",ios::binary);
+            if(!fin)
+  {
+                cout<<"\n\nFile Not Found...";
+                goto menu;
+            }
+            fin.seekg(0);
+            gtotal=0;
+            while(!fin.eof())
+            {
+                fin.read((char*)&amt,sizeof(amt));
+                if(!fin.eof())
+                {
+                    amt.report();
+                    gtotal+=amt.retnetamt();
+                    ff=0;
+                }
+                if(ff!=0) gtotal=0;
+            }
+            gotoxy(17,k);
+            cout<<"\n\n\n\t\t\tGrand Total="<<gtotal;
+            getch();
+            fin.close();
+        }
+        if(cho==2)
+        {
+            goto menu;
+        }
+        goto ss;
+ case 2:
+db:
+        system("cls");
+        gotoxy(25,2);
+        cout<<"Bill Editor";
+        gotoxy(25,3);
+        cout<<"=================\n\n";
+        cout<<"\n\t\t1.Add Item Details\n\n";
+        cout<<"\t\t2.Edit Item Details\n\n";
+        cout<<"\t\t3.Delete Item Details\n\n";
+        cout<<"\t\t4.Back to Main Menu ";
+        int apc;
+        cin>>apc;
+        switch(apc)
+        {
+        case 1:
+            fout.open("itemstore.dat",ios::binary|ios::app);
+            amt.add();
+            cout<<"\n\t\tItem Added Successfully!";
+            getch();
+            goto db;
+  case 2:
+            int ino;
+            flag=0;
+            cout<<"\n\n\tEnter Item Number to be Edited :";
+            cin>>ino;
+            fin.open("itemstore.dat",ios::binary);
+            fout.open("itemstore.dat",ios::binary|ios::app);
+            if(!fin)
+            {
+                cout<<"\n\nFile Not Found...";
+                goto menu;
+            }
+            fin.seekg(0);
+            r=0;
+            while(!fin.eof())
+            {
+                fin.read((char*)&amt,sizeof(amt));
+                if(!fin.eof())
+                {
+                    int x=amt.item::retno();
+                    if(x==ino)
+                    {
+                        flag=1;
+                        fout.seekp(r*sizeof(amt));
+                        system("cls");
+                        cout<<"\n\t\tCurrent Details are\n";
+                        amt.show();
+                        cout<<"\n\n\t\tEnter New Details\n";
+                        amt.add();
+                        cout<<"\n\t\tItem Details editted";
+                    }
+                }
+                r++;
+            }
+            if(flag==0)
+            {
+                cout<<"\n\t\tItem No does not exist...Please Retry!";
+                getch();
+                goto db;
+            }
+            fin.close();
+            getch();
+            goto db;
 
