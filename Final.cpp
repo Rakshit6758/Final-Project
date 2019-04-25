@@ -150,5 +150,40 @@ void amount::report()
         cout<<"NET AMOUNT";
     }
 }
+void amount::pay()
+{
+    show();
+    cout<<"\n\n\n\t\t*********************************************";
+    cout<<"\n\t\t                 DETAILS                  ";
+    cout<<"\n\t\t*********************************************";
+    cout<<"\n\n\t\tPRICE                     :"<<price;
+    cout<<"\n\n\t\tQUANTITY                  :"<<qty;
+    cout<<"\n\t\tTAX PERCENTAGE              :"<<tax;
+    cout<<"\n\t\tDISCOUNT PERCENTAGE         :"<<dis;
+    cout<<"\n\n\n\t\tNET AMOUNT              :Rs."<<netamt;
+    cout<<"\n\t\t*********************************************";
+}
+
+int main()
+{
+    cout.setf(ios::fixed);
+    cout.setf(ios::showpoint);
+    cout<<setprecision(2);
+    fstream tmp("temp.dat",ios::binary|ios::out);
+menu:
+    system("cls");
+    gotoxy(25,2);
+    cout<<"Super Market Billing ";
+    gotoxy(25,3);
+    cout<<"===========================\n\n";
+    cout<<"\n\t\t1.Bill Report\n\n";
+    cout<<"\t\t2.Add/Remove/Edit Item\n\n";
+    cout<<"\t\t3.Show Item Details\n\n";
+    cout<<"\t\t4.Exit\n\n";
+    cout<<"\t\tPlease Enter Required Option: ";
+    int ch,ff;
+    float gtotal;
+    cin>>ch;
+    switch(ch)
 
 
