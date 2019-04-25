@@ -247,4 +247,25 @@ ss:
             goto menu;
         }
         goto ss;
+ case 2:
+db:
+        system("cls");
+        gotoxy(25,2);
+        cout<<"Bill Editor";
+        gotoxy(25,3);
+        cout<<"=================\n\n";
+        cout<<"\n\t\t1.Add Item Details\n\n";
+        cout<<"\t\t2.Edit Item Details\n\n";
+        cout<<"\t\t3.Delete Item Details\n\n";
+        cout<<"\t\t4.Back to Main Menu ";
+        int apc;
+        cin>>apc;
+        switch(apc)
+        {
+        case 1:
+            fout.open("itemstore.dat",ios::binary|ios::app);
+            amt.add();
+            cout<<"\n\t\tItem Added Successfully!";
+            getch();
+            goto db;
 
