@@ -200,4 +200,24 @@ ss:
         int cho;
         cin>>cho;
         if(cho==1)
+  {
+            system("cls");
+            gotoxy(30,3);
+            cout<<" BILL DETAILS ";
+            gotoxy(3,5);
+            cout<<"ITEM NO";
+            gotoxy(13,5);
+            cout<<"NAME";
+            gotoxy(23,5);
+            cout<<"PRICE";
+            gotoxy(33,5);
+            cout<<"QUANTITY";
+            gotoxy(44,5);
+            cout<<"TAX %";
+            gotoxy(52,5);
+            cout<<"DISCOUNT %";
+            gotoxy(64,5);
+            cout<<"NET AMOUNT";
+            fin.open("itemstore.dat",ios::binary);
+            if(!fin)
 
