@@ -1,3 +1,4 @@
+
 #include<iostream>
 #include<windows.h>
 #include<conio.h>
@@ -312,3 +313,48 @@ db:
             getch();
             goto db;
 
+
+
+
+	    case 3:
+            flag=0;
+            cout<<"\n\n\tEnter Item Number to be deleted :";
+            cin>>ino;
+            fin.open("itemstore.dat",ios::binary);
+            if(!fin)
+            {
+                cout<<"\n\nFile Not Found...";
+                goto menu;
+            }
+//fstream tmp("temp.dat",ios::binary|ios::out);
+            fin.seekg(0);
+            while(fin.read((char*)&amt, sizeof(amt)))
+            {
+                int x=amt.item::retno();
+                if(x!=ino)
+                    tmp.write((char*)&amt,sizeof(amt));
+                else
+                {
+                    flag=1;
+                }
+            }
+            fin.close();
+            tmp.close();
+            fout.open("itemstore.dat",ios::trunc|ios::binary);
+            fout.seekp(0);
+            tmp.open("temp.dat",ios::binary|ios::in);
+            if(!tmp)
+            {
+                cout<<"Error in File";
+                goto db;
+            }
+            while(tmp.read((char*)&amt,sizeof(amt)))
+                fout.write((char*)&amt,sizeof(amt));
+            tmp.close();
+            fout.close();
+            if(flag==1)
+                cout<<"\n\t\tItem Succesfully Deleted";
+            else if (flag==0)
+                cout<<"\n\t\tItem does not Exist! Please Retry";
+            getch();
+            goto db;
