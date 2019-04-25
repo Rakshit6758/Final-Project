@@ -1,3 +1,4 @@
+
 #include<iostream>
 #include<windows.h>
 #include<conio.h>
@@ -312,3 +313,117 @@ db:
             getch();
             goto db;
 
+
+
+
+	    case 3:
+            flag=0;
+            cout<<"\n\n\tEnter Item Number to be deleted :";
+            cin>>ino;
+            fin.open("itemstore.dat",ios::binary);
+            if(!fin)
+            {
+                cout<<"\n\nFile Not Found...";
+                goto menu;
+            }
+//fstream tmp("temp.dat",ios::binary|ios::out);
+            fin.seekg(0);
+            while(fin.read((char*)&amt, sizeof(amt)))
+            {
+                int x=amt.item::retno();
+                if(x!=ino)
+                    tmp.write((char*)&amt,sizeof(amt));
+                else
+                {
+                    flag=1;
+                }
+            }
+            fin.close();
+            tmp.close();
+            fout.open("itemstore.dat",ios::trunc|ios::binary);
+            fout.seekp(0);
+            tmp.open("temp.dat",ios::binary|ios::in);
+            if(!tmp)
+            {
+                cout<<"Error in File";
+                goto db;
+            }
+            while(tmp.read((char*)&amt,sizeof(amt)))
+                fout.write((char*)&amt,sizeof(amt));
+            tmp.close();
+            fout.close();
+            if(flag==1)
+                cout<<"\n\t\tItem Succesfully Deleted";
+            else if (flag==0)
+                cout<<"\n\t\tItem does not Exist! Please Retry";
+            getch();
+            goto db
+		    
+		    
+		    ;
+
+
+	    case 4:
+            goto menu;
+        default:
+            cout<<"\n\n\t\tWrong Choice!!! Retry";
+            getch();
+            goto db;
+        }
+    case 3:
+        system("cls");
+        flag=0;
+        int ino;
+        cout<<"\n\n\t\tEnter Item Number :";
+        cin>>ino;
+        fin.open("itemstore.dat",ios::binary);
+        if(!fin)
+        {
+            cout<<"\n\nFile Not Found...\nProgram Terminated!";
+            goto menu;
+        }
+        fin.seekg(0);
+        while(fin.read((char*)&amt,sizeof(amt)))
+        {
+            int x=amt.item::retno();
+            if(x==ino)
+            {
+                amt.pay();
+                flag=1;
+                break;
+            }
+        }
+        if(flag==0)
+            cout<<"\n\t\tItem does not exist....Please Retry!";
+        getch();
+        fin.close();
+        goto menu
+		;
+
+	case 4:
+        system("cls");
+        gotoxy(20,20);
+        cout<<"ARE YOU SURE, YOU WANT TO EXIT (Y/N)?";
+        char yn;
+        cin>>yn;
+        if((yn=='Y')||(yn=='y'))
+        {
+            gotoxy(12,20);
+            system("cls");
+            cout<<"************************** THANKS **************************************";
+            getch();
+            exit(0);
+        }
+        else if((yn=='N')||(yn=='n'))
+            goto menu;
+        else
+        {
+            goto menu;
+        }
+    default:
+        cout<<"\n\n\t\tWrong Choice....Please Retry!";
+        getch();
+        goto menu;
+    }
+    return 0;
+}
