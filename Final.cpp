@@ -220,4 +220,31 @@ ss:
             cout<<"NET AMOUNT";
             fin.open("itemstore.dat",ios::binary);
             if(!fin)
+  {
+                cout<<"\n\nFile Not Found...";
+                goto menu;
+            }
+            fin.seekg(0);
+            gtotal=0;
+            while(!fin.eof())
+            {
+                fin.read((char*)&amt,sizeof(amt));
+                if(!fin.eof())
+                {
+                    amt.report();
+                    gtotal+=amt.retnetamt();
+                    ff=0;
+                }
+                if(ff!=0) gtotal=0;
+            }
+            gotoxy(17,k);
+            cout<<"\n\n\n\t\t\tGrand Total="<<gtotal;
+            getch();
+            fin.close();
+        }
+        if(cho==2)
+        {
+            goto menu;
+        }
+        goto ss;
 
