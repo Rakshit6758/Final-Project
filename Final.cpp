@@ -42,5 +42,29 @@ public:
         cout<<"\n\n\tManufacturing Date(dd-mm-yy): ";
         cin>>d.mm>>d.dd>>d.yy;
     }
+    void show()
+    {
+        cout<<"\n\tItem No: ";
+        cout<<itemno;
+        cout<<"\n\n\tName of the item: ";
+        cout<<name;
+        cout<<"\n\n\tDate : ";
+        cout<<d.mm<<"-"<<d.dd<<"-"<<d.yy;
+    }
+    void report()
+    {
+        gotoxy(3,k);
+        cout<<itemno;
+        gotoxy(13,k);
+        puts(name);
+    }
+    int retno()
+    {
+        return(itemno);
+
+    }
+
+};
+
 
 
