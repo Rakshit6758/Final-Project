@@ -397,4 +397,33 @@ db:
             cout<<"\n\t\tItem does not exist....Please Retry!";
         getch();
         fin.close();
+        goto menu
+		;
+
+	case 4:
+        system("cls");
+        gotoxy(20,20);
+        cout<<"ARE YOU SURE, YOU WANT TO EXIT (Y/N)?";
+        char yn;
+        cin>>yn;
+        if((yn=='Y')||(yn=='y'))
+        {
+            gotoxy(12,20);
+            system("cls");
+            cout<<"************************** THANKS **************************************";
+            getch();
+            exit(0);
+        }
+        else if((yn=='N')||(yn=='n'))
+            goto menu;
+        else
+        {
+            goto menu;
+        }
+    default:
+        cout<<"\n\n\t\tWrong Choice....Please Retry!";
+        getch();
         goto menu;
+    }
+    return 0;
+}
