@@ -268,4 +268,47 @@ db:
             cout<<"\n\t\tItem Added Successfully!";
             getch();
             goto db;
+  case 2:
+            int ino;
+            flag=0;
+            cout<<"\n\n\tEnter Item Number to be Edited :";
+            cin>>ino;
+            fin.open("itemstore.dat",ios::binary);
+            fout.open("itemstore.dat",ios::binary|ios::app);
+            if(!fin)
+            {
+                cout<<"\n\nFile Not Found...";
+                goto menu;
+            }
+            fin.seekg(0);
+            r=0;
+            while(!fin.eof())
+            {
+                fin.read((char*)&amt,sizeof(amt));
+                if(!fin.eof())
+                {
+                    int x=amt.item::retno();
+                    if(x==ino)
+                    {
+                        flag=1;
+                        fout.seekp(r*sizeof(amt));
+                        system("cls");
+                        cout<<"\n\t\tCurrent Details are\n";
+                        amt.show();
+                        cout<<"\n\n\t\tEnter New Details\n";
+                        amt.add();
+                        cout<<"\n\t\tItem Details editted";
+                    }
+                }
+                r++;
+            }
+            if(flag==0)
+            {
+                cout<<"\n\t\tItem No does not exist...Please Retry!";
+                getch();
+                goto db;
+            }
+            fin.close();
+            getch();
+            goto db;
 
